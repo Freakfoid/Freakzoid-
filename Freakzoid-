@@ -1,1 +1,726 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Максим Сорокин | Frontend-разработчик — резюме</title>
+    <style>
+        /* ---------- ГЛОБАЛЬНЫЕ СТИЛИ, ОБНУЛЕНИЕ ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f9fafb;
+            color: #111827;
+            line-height: 1.5;
+            scroll-behavior: smooth; /* плавная прокрутка по якорям */
+        }
+
+        /* контейнер с ограничением ширины */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== ХЕДЕР / ГЛАВНАЯ СЕКЦИЯ (профиль) ===== */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 60px 0 40px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .hero-content {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 260px;
+        }
+
+        .hero-text .badge {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #1e293b, #2563eb);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .hero-text .title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #2563eb;
+            margin-bottom: 20px;
+            border-left: 4px solid #2563eb;
+            padding-left: 16px;
+        }
+
+        .hero-text .description {
+            font-size: 1.1rem;
+            color: #4b5563;
+            max-width: 550px;
+            margin-bottom: 32px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            background: transparent;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-outline {
+            border: 1.5px solid #2563eb;
+            color: #2563eb;
+            background: white;
+        }
+
+        .btn-outline:hover {
+            background: #eff6ff;
+            transform: translateY(-2px);
+        }
+
+        /* аватар (заглушка) */
+        .hero-avatar {
+            flex-shrink: 0;
+            background: linear-gradient(145deg, #d9e6ff, #ffffff);
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            border: 4px solid white;
+        }
+
+        .avatar-inner {
+            font-size: 5rem;
+            font-weight: 500;
+            background: #2563eb;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: inset 0 -2px 0 rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* ===== СЕКЦИИ (общие стили) ===== */
+        .section {
+            padding: 80px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #2563eb;
+            border-radius: 4px;
+        }
+
+        /* карточки опыта и образования */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .exp-item, .edu-item {
+            background: white;
+            border-radius: 24px;
+            padding: 24px 28px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
+            border: 1px solid #eef2ff;
+            transition: all 0.3s;
+        }
+
+        .exp-item:hover, .edu-item:hover {
+            border-color: #cbdffc;
+            box-shadow: 0 15px 30px -12px rgba(0, 0, 0, 0.08);
+        }
+
+        .exp-header, .edu-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+        }
+
+        .exp-company, .edu-institution {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .exp-date, .edu-date {
+            color: #4b5563;
+            font-size: 0.9rem;
+            background: #f3f4f6;
+            padding: 4px 12px;
+            border-radius: 30px;
+        }
+
+        .exp-role {
+            font-weight: 600;
+            color: #2563eb;
+            margin: 8px 0 12px;
+            font-size: 1rem;
+        }
+
+        .exp-desc, .edu-desc {
+            color: #374151;
+            line-height: 1.5;
+            margin-top: 12px;
+        }
+
+        /* Сетка навыков (flex/grid) */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 32px;
+        }
+
+        .skill-category {
+            background: white;
+            border-radius: 28px;
+            padding: 24px;
+            border: 1px solid #eef2ff;
+            transition: transform 0.2s;
+        }
+
+        .skill-category h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill-tag {
+            background: #f1f5f9;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1e293b;
+            transition: 0.2s;
+        }
+
+        .skill-tag:hover {
+            background: #e0e7ff;
+            transform: scale(1.02);
+        }
+
+        /* форма обратной связи */
+        .contact-form {
+            background: white;
+            border-radius: 32px;
+            padding: 36px;
+            box-shadow: 0 20px 30px -20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eef2ff;
+            max-width: 700px;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+            color: #1f2937;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 20px;
+            border: 1.5px solid #e2e8f0;
+            font-size: 1rem;
+            transition: all 0.2s;
+            font-family: inherit;
+            background: #ffffff;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .error-message {
+            color: #dc2626;
+            font-size: 0.8rem;
+            margin-top: 6px;
+            display: block;
+        }
+
+        .btn-submit {
+            background: #2563eb;
+            color: white;
+            width: auto;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: #1d4ed8;
+            transform: scale(1.02);
+        }
+
+        .form-success {
+            background: #dcfce7;
+            color: #15803d;
+            padding: 14px;
+            border-radius: 20px;
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 32px 0;
+            color: #6c757d;
+            font-size: 0.85rem;
+            border-top: 1px solid #e5e7eb;
+            margin-top: 20px;
+        }
+
+        /* Анимация появления секций (Intersection Observer) */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
+        }
+
+        .fade-up.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* АДАПТИВНОСТЬ */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            .hero {
+                min-height: auto;
+                padding: 40px 0;
+            }
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            .hero-text .title {
+                font-size: 1.2rem;
+            }
+            .hero-avatar {
+                width: 160px;
+                height: 160px;
+            }
+            .avatar-inner {
+                width: 130px;
+                height: 130px;
+                font-size: 3.5rem;
+            }
+            .section {
+                padding: 60px 0;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .exp-header, .edu-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .contact-form {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            .btn-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .btn {
+                justify-content: center;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Секция Hero / профиль (имя: Максим Сорокин) -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="badge">✨ Открыт для новых возможностей</span>
+                <h1>Максим Сорокин</h1>
+                <div class="title">Frontend-разработчик & UI-энтузиаст</div>
+                <p class="description">Создаю современные, быстрые и адаптивные веб-приложения. 4+ года опыта в React, TypeScript и дизайн-системах. Люблю чистый код и продуманный UX.</p>
+                <div class="btn-group">
+                    <!-- Кнопка Скачать резюме (псевдо-заглушка PDF) -->
+                    <button class="btn btn-primary" id="downloadResumeBtn">📄 Скачать резюме (PDF)</button>
+                    <!-- Кнопка связаться -> плавный скролл к форме -->
+                    <button class="btn btn-outline" id="contactScrollBtn">✉️ Связаться со мной</button>
+                </div>
+            </div>
+            <div class="hero-avatar">
+                <!-- Инициалы МС -->
+                <div class="avatar-inner">МС</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Опыт работы -->
+    <section class="section fade-up" id="experience">
+        <h2 class="section-title">💼 Опыт работы</h2>
+        <div class="timeline">
+            <div class="exp-item">
+                <div class="exp-header">
+                    <span class="exp-company">Яндекс.Практикум</span>
+                    <span class="exp-date">2022 — настоящее время</span>
+                </div>
+                <div class="exp-role">Senior Frontend-разработчик</div>
+                <div class="exp-desc">Разработка и поддержка образовательной платформы. Миграция легаси на React 18 и TypeScript. Внедрение Storybook, создание компонентной библиотеки. Наставничество джуниоров, код-ревью.</div>
+            </div>
+            <div class="exp-item">
+                <div class="exp-header">
+                    <span class="exp-company">Digital Agency «Rocket Tech»</span>
+                    <span class="exp-date">2020 — 2022</span>
+                </div>
+                <div class="exp-role">Frontend-разработчик</div>
+                <div class="exp-desc">Разработка 12+ коммерческих проектов (CRM, маркетплейсы, лендинги). Использовал Vue 3, Pinia, Tailwind. Настройка Webpack/Vite, оптимизация производительности (LCP снижен на 30%).</div>
+            </div>
+            <div class="exp-item">
+                <div class="exp-header">
+                    <span class="exp-company">Freebird Studio</span>
+                    <span class="exp-date">2019 — 2020</span>
+                </div>
+                <div class="exp-role">HTML/CSS верстальщик (стажёр)</div>
+                <div class="exp-desc">Вёрстка адаптивных email-шаблонов и промо-сайтов. Работа по методологии БЭМ, pixel perfect. Первые коммерческие проекты и база для роста.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Образование -->
+    <section class="section fade-up" id="education">
+        <h2 class="section-title">🎓 Образование</h2>
+        <div class="timeline">
+            <div class="edu-item">
+                <div class="exp-header">
+                    <span class="edu-institution">НИУ ВШЭ, Москва</span>
+                    <span class="edu-date">2017 – 2021</span>
+                </div>
+                <div class="exp-role">Бакалавр программной инженерии</div>
+                <div class="edu-desc">Факультет компьютерных наук, специализация «Разработка интерфейсов». Диплом с отличием. Курсовые проекты: SPA на React, конструктор форм.</div>
+            </div>
+            <div class="edu-item">
+                <div class="exp-header">
+                    <span class="edu-institution">Яндекс.Практикум</span>
+                    <span class="edu-date">2021 – 2022</span>
+                </div>
+                <div class="exp-role">Веб-разработчик (профессиональная переподготовка)</div>
+                <div class="edu-desc">Углублённый курс: Node.js, Express, MongoDB, Docker, TypeScript, архитектура приложений.</div>
+            </div>
+            <div class="edu-item">
+                <div class="exp-header">
+                    <span class="edu-institution">Курсы «HTML Academy»</span>
+                    <span class="edu-date">2018</span>
+                </div>
+                <div class="exp-role">Адаптивная вёрстка и JavaScript</div>
+                <div class="edu-desc">Интенсив: верстка сложных макетов, препроцессоры, сборка Gulp.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Навыки (технические + мягкие) -->
+    <section class="section fade-up" id="skills">
+        <h2 class="section-title">🧠 Навыки</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>⚙️ Frontend Core</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">Next.js</span>
+                    <span class="skill-tag">Vue 3</span>
+                    <span class="skill-tag">Redux Toolkit</span>
+                    <span class="skill-tag">Tailwind CSS</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>🛠️ Инструменты</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Git/GitHub</span>
+                    <span class="skill-tag">Webpack / Vite</span>
+                    <span class="skill-tag">Figma</span>
+                    <span class="skill-tag">ESLint / Prettier</span>
+                    <span class="skill-tag">Jest / Vitest</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>🤝 Soft Skills</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Командная работа</span>
+                    <span class="skill-tag">Критическое мышление</span>
+                    <span class="skill-tag">Тайм-менеджмент</span>
+                    <span class="skill-tag">Наставничество</span>
+                    <span class="skill-tag">Презентации</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Форма обратной связи (контакт) -->
+    <section class="section fade-up" id="contact">
+        <h2 class="section-title">📬 Напишите мне</h2>
+        <div class="contact-form" id="contactFormBlock">
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label for="name">Имя *</label>
+                    <input type="text" id="name" name="name" placeholder="Максим" required>
+                    <div class="error-message" id="nameError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" placeholder="hello@example.com" required>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="message">Сообщение *</label>
+                    <textarea id="message" rows="4" placeholder="Расскажите о вашем проекте или предложении..." required></textarea>
+                    <div class="error-message" id="messageError"></div>
+                </div>
+                <button type="submit" class="btn-submit">Отправить сообщение</button>
+                <div id="formStatus" style="margin-top: 18px;"></div>
+            </form>
+        </div>
+    </section>
+    <footer>
+        © 2025 Максим Сорокин · Интерактивное резюме · GitHub Pages
+    </footer>
+</div>
+
+<script>
+    // ---------- 1. Плавная прокрутка к форме по кнопке "Связаться со мной" ----------
+    const contactBtn = document.getElementById('contactScrollBtn');
+    const contactSection = document.getElementById('contact');
+
+    if (contactBtn && contactSection) {
+        contactBtn.addEventListener('click', () => {
+            contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
+
+    // ---------- 2. Кнопка "Скачать резюме" - заглушка (имитация pdf) ----------
+    const downloadBtn = document.getElementById('downloadResumeBtn');
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', () => {
+            // Показываем информационное сообщение и генерируем PDF-заглушку
+            alert('Скачивание резюме в формате PDF (демо-версия).\nПолная версия доступна по запросу.');
+            const dummyContent = `РЕЗЮМЕ: Максим Сорокин\nFrontend-разработчик\nКонтакты: m.sorokin@dev.me\nОпыт: 4+ года, React, TypeScript, Vue, Next.js\nОбразование: НИУ ВШЭ (бакалавр программной инженерии)`;
+            const blob = new Blob([dummyContent], {type: 'application/pdf'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Maksim_Sorokin_Resume.pdf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    }
+
+    // ---------- 3. Валидация формы + базовая обработка (без отправки на сервер) ----------
+    const form = document.getElementById('feedbackForm');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const messageError = document.getElementById('messageError');
+    const formStatus = document.getElementById('formStatus');
+
+    function validateEmail(email) {
+        const re = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    function clearErrors() {
+        nameError.textContent = '';
+        emailError.textContent = '';
+        messageError.textContent = '';
+        formStatus.innerHTML = '';
+    }
+
+    function showFieldError(errorElement, message) {
+        errorElement.textContent = message;
+    }
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        clearErrors();
+        let isValid = true;
+
+        const nameValue = nameInput.value.trim();
+        if (nameValue === '') {
+            showFieldError(nameError, 'Пожалуйста, укажите ваше имя.');
+            isValid = false;
+        } else if (nameValue.length < 2) {
+            showFieldError(nameError, 'Имя должно содержать хотя бы 2 символа.');
+            isValid = false;
+        }
+
+        const emailValue = emailInput.value.trim();
+        if (emailValue === '') {
+            showFieldError(emailError, 'Введите email для связи.');
+            isValid = false;
+        } else if (!validateEmail(emailValue)) {
+            showFieldError(emailError, 'Введите корректный email (например, name@domain.com).');
+            isValid = false;
+        }
+
+        const messageValue = messageInput.value.trim();
+        if (messageValue === '') {
+            showFieldError(messageError, 'Напишите сообщение.');
+            isValid = false;
+        } else if (messageValue.length < 10) {
+            showFieldError(messageError, 'Сообщение должно быть не менее 10 символов.');
+            isValid = false;
+        }
+
+        if (isValid) {
+            // Имитация успешной отправки (без реального бэкенда)
+            formStatus.innerHTML = '<div class="form-success">✅ Спасибо, Максим Сорокин свяжется с вами в ближайшее время!</div>';
+            form.reset();
+            setTimeout(() => {
+                if (formStatus.firstChild) formStatus.innerHTML = '';
+            }, 5000);
+        } else {
+            formStatus.innerHTML = '<div style="color:#b91c1c; background:#fee2e2; padding:12px; border-radius:20px;">⚠️ Пожалуйста, исправьте ошибки в форме.</div>';
+            setTimeout(() => {
+                if (formStatus.innerHTML.includes('исправьте ошибки')) formStatus.innerHTML = '';
+            }, 4000);
+        }
+    });
+
+    // ---------- 4. Анимация появления секций при скролле (Intersection Observer) ----------
+    const fadeElements = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('appear');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: "0px 0px -20px 0px" });
+
+    fadeElements.forEach(el => observer.observe(el));
+
+    // Для уже видимых элементов при загрузке
+    window.addEventListener('load', () => {
+        fadeElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 100) {
+                el.classList.add('appear');
+                observer.unobserve(el);
+            }
+        });
+    });
+</script>
+</body>
+</html>
